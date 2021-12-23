@@ -10,7 +10,6 @@ import Location from "./sub/Location.js";
 import Membership from "./sub/Membership.js";
 import Youtube from "./sub/Youtube.js";
 
-
 function App() {
   return (
     <div className="App"> 
@@ -24,9 +23,7 @@ function App() {
       <Route exact path="/location" component={Location}></Route>
       <Route exact path="/membership" component={Membership}></Route>  
           
-      <Footer />
-
-      
+      <Footer />      
     </div>
   );
 }
