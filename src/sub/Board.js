@@ -14,7 +14,12 @@ function Board(){
         //전달받은 데이터를 setPosts를 이용해 posts스테이트에 담음
         setPosts(data.data.data);
       })
-  });
+
+      console.log("test");
+  },[]); 
+  //뒤에 의존할 state값을 비워두면 해당 useEffect함수는 처음 컴포넌트가 렌더링 된 시점 한번만 실행이 되고.. 추후 state값이 변경이 될 때에는 아무런 동작을 하지 않음 
+
+  //데이터 불러올때의 상용구문
 
   return (
     <section className="content board">
