@@ -1,7 +1,7 @@
 .content {
   padding: 150px 0px;
 
-  .inner {
+  > .inner {
     width: 1180px; margin: 0px auto; min-height: 500px;
 
     h1 {
@@ -12,7 +12,7 @@
 
 @media screen and (max-width: 1179px){
   .content {
-    .inner {
+    >.inner {
       width: 100%; padding: 0px 40px;
     }
   }

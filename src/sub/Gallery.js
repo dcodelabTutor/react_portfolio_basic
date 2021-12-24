@@ -16,9 +16,10 @@ function Gallery(){
   let [items, setItems] = useState([]);
   let [loading, setLoading] = useState(false);
   let list = useRef(null);  
-  //const imgSrc = `https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`;
+  
   
   useEffect(()=> {
+    
     getFlickr(url)
 
     return ()=>{
@@ -49,7 +50,11 @@ function Gallery(){
 
                 return (
                   <li key={index} className="item">
-                    <img src={imgSrc} />
+                    <div className="inner">
+                      <img src={imgSrc} />
+
+                      <h2>{item.title}</h2>
+                    </div>                    
                   </li>
                 )
               })
