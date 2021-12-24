@@ -79,7 +79,9 @@ function Gallery(){
     .get(url)
     .then(json=> setItems(json.data.photos.photo))  
     
-    list.current.classList.add("on");
+    setTimeout(()=>{
+      list.current.classList.add("on")
+    },1000);
     console.log("test");
   }  
 }
