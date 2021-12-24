@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 function Board(){
   //json데이터로부터 받을 빈 배열을 스테이트로 생성
   let [posts, setPosts] = useState([]);
+  let len = posts.length;
 
   //컴포넌트가 랜더링된 순간
   useEffect(()=>{
@@ -34,6 +35,7 @@ function Board(){
           posts.slice(0).reverse().map((data,index)=>{
             return (
               <article key={index}>
+                <h1>{len-index}</h1>
                 <h2>{data.title}</h2>
                 <strong>{data.writer}</strong>
                 <span>{data.date}</span>
