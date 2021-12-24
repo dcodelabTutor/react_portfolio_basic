@@ -4,31 +4,32 @@ import { useEffect, useRef, useState } from "react";
 function Gallery(){
   const baseURL = "https://www.flickr.com/services/rest/?";
   const method1 = "flickr.interestingness.getList";
+  const method2 = "flickr.photos.search";
   const key= "e7ed3b39fe112d7e93d03c19325305e0";
   const count = 500;
   const url = `${baseURL}method=${method1}&api_key=${key}&per_page=${count}&format=json&nojsoncallback=1`;
-
-  //flickr데이터 배열을 받을 빈 배열을 items이름의 state로 설정
+  const url2 = `${baseURL}method=${method2}&api_key=${key}&per_page=${count}&format=json&nojsoncallback=1&privacy_filter=1&tags=ocean`; 
+  
   let [items, setItems] = useState([]);
+  let [loading, setLoading] = useState(false);
   let list = useRef(null);  
+  
+  useEffect(()=> {
+    getFlickr(url)
 
-  //useEffect의 의존성을 비워서 처음 로딩시 한번만 실행되게 설정
-  useEffect( getFlickr,[]);
-
-
-  async function getFlickr(){
-    await axios
-    .get(url)
-    .then(json=> setItems(json.data.photos.photo))
-    
-    list.current.classList.add("on");
-    console.log("test");
-  }  
+    return ()=>{
+      console.log("해당 컴포넌트 사라짐")
+    }
+  },[]); 
 
   return (
     <section className="content gallery">
       <div className="inner">
         <h1>Gallery</h1>
+        <button onClick={()=>{
+          list.current.classList.remove("on");
+          getFlickr(url2);          
+        }}>수정</button>
 
         <ul className="list" ref={list}>
           {
@@ -49,6 +50,15 @@ function Gallery(){
       </div>
     </section>
   )
+
+  async function getFlickr(url){
+    await axios
+    .get(url)
+    .then(json=> setItems(json.data.photos.photo))  
+    
+    list.current.classList.add("on");
+    console.log("test");
+  }  
 }
 
 export default Gallery;
