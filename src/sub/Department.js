@@ -26,7 +26,7 @@ function Department(){
         <h1>Department</h1>
 
         <button onClick={()=> setCount(count+1)}>plus</button>
-        <button onClick={()=> setCount2(count2-1)}>mius</button>
+        <button onClick={()=> setCount(count-1)}>mius</button>
 
         <p>{count}</p>
         <p>{count2}</p>

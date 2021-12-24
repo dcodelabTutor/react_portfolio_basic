@@ -28,10 +28,16 @@ function Board(){
         {
           // posts 스테이트에 담겨있는 배열의 갯수만큼
           //반복을 돌면서 article생성
-          posts.map((data,index)=>{
+
+          //state값을 역으로 순서를 바꾼다음에 반복처리
+          //게시글을 최신글이 상단에 출력되야 되기 때문
+          posts.slice(0).reverse().map((data,index)=>{
             return (
               <article key={index}>
-                {data.title}
+                <h2>{data.title}</h2>
+                <strong>{data.writer}</strong>
+                <span>{data.date}</span>
+                <em>{data.like}</em>
               </article>
             )
           })
