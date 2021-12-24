@@ -1,18 +1,22 @@
+//npm install --save react-masonry-component
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
+import Masonry from "react-masonry-component";
 
-function Gallery(){
-  const baseURL = "https://www.flickr.com/services/rest/?";
-  const method1 = "flickr.interestingness.getList";
-  const method2 = "flickr.photos.search";
-  const key= "e7ed3b39fe112d7e93d03c19325305e0";
-  const count = 500;
-  const url = `${baseURL}method=${method1}&api_key=${key}&per_page=${count}&format=json&nojsoncallback=1`;
-  const url2 = `${baseURL}method=${method2}&api_key=${key}&per_page=${count}&format=json&nojsoncallback=1&privacy_filter=1&tags=ocean`; 
+const masonryOptions = {
+  fitWidth: false,
+  //columnWidth: "25%",
+  gutter: 0,
+  itemSelector: ".item"
+}
+
+function Gallery(){ 
   
+  let [url, url2] = getURL();
   let [items, setItems] = useState([]);
   let [loading, setLoading] = useState(false);
   let list = useRef(null);  
+  //const imgSrc = `https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`;
   
   useEffect(()=> {
     getFlickr(url)
@@ -31,25 +35,44 @@ function Gallery(){
           getFlickr(url2);          
         }}>수정</button>
 
-        <ul className="list" ref={list}>
-          {
-            items.map((item, index)=>{
-              const imgSrc = `https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`;
-              return (
-                <li key={index}>
-                  <div className="pic">
-                    <img src={imgSrc} />
-                  </div>
+        <div className="list" ref={list}>
+          <Masonry
+            className={"frame"}
+            elementType={"ul"}
+            options={masonryOptions}
+            disableImagesLoaded={false}
+            updateOnEachImageLoad={false}
+          >
+            {
+              items.map((item, index)=>{
+                const imgSrc = `https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`;
 
-                  <p>{item.title}</p>
-                </li>
-              )
-            })
-          }
-        </ul>
+                return (
+                  <li key={index} className="item">
+                    <img src={imgSrc} />
+                  </li>
+                )
+              })
+            }
+            
+          </Masonry>
+        </div>
+        
       </div>
     </section>
   )
+
+  function getURL(){
+    const baseURL = "https://www.flickr.com/services/rest/?";
+    const method1 = "flickr.interestingness.getList";
+    const method2 = "flickr.photos.search";
+    const key= "e7ed3b39fe112d7e93d03c19325305e0";
+    const count = 500;
+    const url = `${baseURL}method=${method1}&api_key=${key}&per_page=${count}&format=json&nojsoncallback=1`;
+    const url2 = `${baseURL}method=${method2}&api_key=${key}&per_page=${count}&format=json&nojsoncallback=1&privacy_filter=1&tags=ocean`; 
+
+    return [url, url2];
+  }
 
   async function getFlickr(url){
     await axios
