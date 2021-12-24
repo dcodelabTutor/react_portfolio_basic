@@ -10,35 +10,20 @@ function Gallery(){
 
   //flickr데이터 배열을 받을 빈 배열을 items이름의 state로 설정
   let [items, setItems] = useState([]);
-  let list = useRef(null);
-  
+  let list = useRef(null);  
 
   //useEffect의 의존성을 비워서 처음 로딩시 한번만 실행되게 설정
-  useEffect(()=>{
-    
-    callData();   
+  useEffect( getFlickr,[]);
 
-  },[]);
 
-  async function callData(){
-    await getFlickr();
-    delay();
-  }
-
-  function getFlickr(){
-    axios
+  async function getFlickr(){
+    await axios
     .get(url)
-    .then(json=>{
-      console.log(json.data.photos.photo);
-      setItems(json.data.photos.photo);
-    })
-  }
-
-  function delay(){
-    setTimeout(()=>{
-      list.current.classList.add("on");
-    },5000);
-  }
+    .then(json=> setItems(json.data.photos.photo))
+    
+    list.current.classList.add("on");
+    console.log("test");
+  }  
 
   return (
     <section className="content gallery">
