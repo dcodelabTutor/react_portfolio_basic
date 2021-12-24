@@ -30,7 +30,11 @@ function Gallery(){
   return (
     <section className="content gallery">
       <div className="inner">
-        <h1>Gallery</h1>
+        <h1 onClick={()=>{
+          list.current.classList.remove("on");
+          getFlickr(url);  
+        }}>Gallery</h1>
+
         <button onClick={()=>{
           list.current.classList.remove("on");
           getFlickr(url2);          
