@@ -26,11 +26,13 @@ function Gallery(){
       <div className="inner">
         <h1 onClick={()=>{
           list.current.classList.remove("on");
+          setLoading(true);
           getFlickr(url);  
         }}>Gallery</h1>
 
         <button onClick={()=>{
           list.current.classList.remove("on");
+          setLoading(true);
           getFlickr(url2);          
         }}>수정</button>
 
@@ -51,7 +53,6 @@ function Gallery(){
     const count = 500;
     const url = `${baseURL}method=${method1}&api_key=${key}&per_page=${count}&format=json&nojsoncallback=1`;
     const url2 = `${baseURL}method=${method2}&api_key=${key}&per_page=${count}&format=json&nojsoncallback=1&privacy_filter=1&tags=ocean`; 
-
     return [url, url2];
   }
 
