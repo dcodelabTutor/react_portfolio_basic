@@ -12,6 +12,7 @@ function Gallery(){
   let [items, setItems] = useState([]);
   let [loading, setLoading] = useState(true);
   let [enableClick, setEnableClick] = useState(true);
+  let [interest, setInterest] = useState(true);
 
   let list = useRef(null); 
   let inputs = useRef(null);
@@ -30,10 +31,11 @@ function Gallery(){
     <section className="content gallery">
       <div className="inner">
         <h1 onClick={()=>{
-          if(enableClick){
-            setEnableClick(false);
-            list.current.classList.remove("on");
-            setLoading(true);
+
+          if(enableClick && !interest){
+            setInterest(true);
+            init();
+
             getFlickr({
               type: "interest",
               count: 500
@@ -45,22 +47,23 @@ function Gallery(){
         <div className="searchBox">
           <input type="text" ref={inputs} />
           <button onClick={()=>{
-            if(enableClick){              
-              setEnableClick(false);              
+            if(enableClick){   
               
-              list.current.classList.remove("on");
-              setLoading(true);
-
               let tags = inputs.current.value;
+              if(tags == "") return;
               inputs.current.value="";
+              setInterest(false);
+
+              init();
+
+              
         
               getFlickr({
                 type: "search",
                 count: 500,
                 tags: tags
               });
-            }
-            
+            }            
           }}>검색</button>
         </div>
 
@@ -72,6 +75,12 @@ function Gallery(){
       </div>
     </section>
   )
+
+  function init(){
+    setEnableClick(false);
+    list.current.classList.remove("on");
+    setLoading(true);
+  }
  
 
   async function getFlickr(opt){
@@ -100,6 +109,8 @@ function Gallery(){
       setEnableClick(true);
     },1000); 
   }  
+
+
 
   function List(){
     return (
