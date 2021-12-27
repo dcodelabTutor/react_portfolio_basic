@@ -12,6 +12,8 @@ function Gallery(){
   let [url, url2] = getURL();
   let [items, setItems] = useState([]);
   let [loading, setLoading] = useState(true);
+  let [enableClick, setEnableClick] = useState(true);
+
   let list = useRef(null); 
   
   useEffect(()=> {    
@@ -25,15 +27,22 @@ function Gallery(){
     <section className="content gallery">
       <div className="inner">
         <h1 onClick={()=>{
-          list.current.classList.remove("on");
-          setLoading(true);
-          getFlickr(url);  
+          if(enableClick){
+            setEnableClick(false);
+            list.current.classList.remove("on");
+            setLoading(true);
+            getFlickr(url); 
+          }
+           
         }}>Gallery</h1>
 
         <button onClick={()=>{
-          list.current.classList.remove("on");
-          setLoading(true);
-          getFlickr(url2);          
+          if(enableClick){
+            setEnableClick(false);
+            list.current.classList.remove("on");
+            setLoading(true);
+            getFlickr(url2);  
+          }                  
         }}>수정</button>
 
         {loading ? <img className="loading" src="./img/loading.gif" /> : ""} 
@@ -62,7 +71,10 @@ function Gallery(){
     .then(json=> setItems(json.data.photos.photo)); 
 
     list.current.classList.add("on"); 
-    setLoading(false);     
+    setLoading(false);    
+    setTimeout(()=>{
+      setEnableClick(true);
+    },1000); 
   }  
 
   function List(){
