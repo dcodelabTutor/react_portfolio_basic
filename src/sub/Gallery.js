@@ -14,6 +14,7 @@ function Gallery(){
   let [enableClick, setEnableClick] = useState(true);
 
   let list = useRef(null); 
+  let inputs = useRef(null);
   
   useEffect(()=> {    
     getFlickr({
@@ -37,22 +38,31 @@ function Gallery(){
               type: "interest",
               count: 500
             });
-          }
-           
+          }           
         }}>Gallery</h1>
+        
 
-        <button onClick={()=>{
-          if(enableClick){
-            setEnableClick(false);
-            list.current.classList.remove("on");
-            setLoading(true);
-            getFlickr({
-              type: "search",
-              count: 500,
-              tags: "바다"
-            }); 
-          }                  
-        }}>수정</button>
+        <div className="searchBox">
+          <input type="text" ref={inputs} />
+          <button onClick={()=>{
+            if(enableClick){              
+              setEnableClick(false);              
+              
+              list.current.classList.remove("on");
+              setLoading(true);
+
+              let tags = inputs.current.value;
+              inputs.current.value="";
+        
+              getFlickr({
+                type: "search",
+                count: 500,
+                tags: tags
+              });
+            }
+            
+          }}>검색</button>
+        </div>
 
         {loading ? <img className="loading" src="./img/loading.gif" /> : ""} 
 
