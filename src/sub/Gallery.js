@@ -5,23 +5,18 @@ import Masonry from "react-masonry-component";
 
 const masonryOptions = {
   fitWidth: false,
-  //columnWidth: "25%",
   gutter: 0,
   itemSelector: ".item"
 }
 
-function Gallery(){ 
-  
+function Gallery(){   
   let [url, url2] = getURL();
   let [items, setItems] = useState([]);
   let [loading, setLoading] = useState(false);
-  let list = useRef(null);  
+  let list = useRef(null); 
   
-  
-  useEffect(()=> {
-    
-    getFlickr(url)
-
+  useEffect(()=> {    
+    getFlickr(url);
     return ()=>{
       console.log("해당 컴포넌트 사라짐")
     }
@@ -62,11 +57,9 @@ function Gallery(){
                   </li>
                 )
               })
-            }
-            
+            }            
           </Masonry>
-        </div>
-        
+        </div>        
       </div>
     </section>
   )
@@ -86,12 +79,9 @@ function Gallery(){
   async function getFlickr(url){
     await axios
     .get(url)
-    .then(json=> setItems(json.data.photos.photo))  
-    
-    setTimeout(()=>{
-      list.current.classList.add("on")
-    },1000);
-    console.log("test");
+    .then(json=> setItems(json.data.photos.photo));  
+
+    list.current.classList.add("on");      
   }  
 }
 
