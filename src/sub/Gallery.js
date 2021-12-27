@@ -45,7 +45,22 @@ function Gallery(){
         
 
         <div className="searchBox">
-          <input type="text" ref={inputs} />
+          <input type="text" ref={inputs} onKeyPress={e=>{
+            //console.log(e.key);
+            if(e.key !=="Enter") return;
+            let tags = e.target.value;
+            if(tags == "") return;
+              inputs.current.value="";
+              setInterest(false);
+
+              init();              
+        
+              getFlickr({
+                type: "search",
+                count: 500,
+                tags: tags
+              });
+          }} />
           <button onClick={()=>{
             if(enableClick){   
               
