@@ -54,9 +54,7 @@ function Gallery(){
               inputs.current.value="";
               setInterest(false);
 
-              init();
-
-              
+              init();              
         
               getFlickr({
                 type: "search",
@@ -103,10 +101,11 @@ function Gallery(){
     .get(url)
     .then(json=> setItems(json.data.photos.photo)); 
 
-    list.current.classList.add("on"); 
-    setLoading(false);    
+     
     setTimeout(()=>{
       setEnableClick(true);
+      list.current.classList.add("on"); 
+      setLoading(false);   
     },1000); 
   }  
 
