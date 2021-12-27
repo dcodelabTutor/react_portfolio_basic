@@ -1,5 +1,12 @@
 .gallery {
-  .inner {
+  > .inner {
+    .loading {
+      position: absolute;  
+      top: 0px; 
+      left: 50%;  
+      width: 50%;
+      transform: translateX(-50%);
+    }
     .list {
       position: relative;
       opacity: 0;

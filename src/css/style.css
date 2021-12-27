@@ -57,7 +57,8 @@ footer {
   .content > .inner {
     width: 1180px;
     margin: 0px auto;
-    min-height: 500px; }
+    min-height: 500px;
+    position: relative; }
     .content > .inner h1 {
       font: normal 30px/1 "arial";
       color: #555;
@@ -73,29 +74,35 @@ footer {
   border: 1px solid #bbb;
   margin-bottom: 20px; }
 
-.gallery .inner .list {
+.gallery > .inner .loading {
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  width: 50%;
+  transform: translateX(-50%); }
+.gallery > .inner .list {
   position: relative;
   opacity: 0;
   transform: translateY(200px);
   transition: 1s; }
-  .gallery .inner .list.on {
+  .gallery > .inner .list.on {
     opacity: 1;
     transform: translateY(0px); }
-  .gallery .inner .list .frame {
+  .gallery > .inner .list .frame {
     width: 100%; }
-    .gallery .inner .list .frame .item {
+    .gallery > .inner .list .frame .item {
       width: 25%;
       padding: 10px;
       float: left; }
-      .gallery .inner .list .frame .item .inner {
+      .gallery > .inner .list .frame .item .inner {
         width: 100%;
         padding: 12px;
         background: #fff;
         box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1); }
-        .gallery .inner .list .frame .item .inner img {
+        .gallery > .inner .list .frame .item .inner img {
           width: 100%;
           margin-bottom: 10px; }
-        .gallery .inner .list .frame .item .inner h2 {
+        .gallery > .inner .list .frame .item .inner h2 {
           font: normal 12px/1.2 "arial";
           color: #777;
           margin-bottom: 20px; }

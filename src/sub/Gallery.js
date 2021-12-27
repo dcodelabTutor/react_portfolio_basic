@@ -1,4 +1,3 @@
-//npm install --save react-masonry-component
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import Masonry from "react-masonry-component";
@@ -12,7 +11,7 @@ const masonryOptions = {
 function Gallery(){   
   let [url, url2] = getURL();
   let [items, setItems] = useState([]);
-  let [loading, setLoading] = useState(false);
+  let [loading, setLoading] = useState(true);
   let list = useRef(null); 
   
   useEffect(()=> {    
@@ -35,30 +34,10 @@ function Gallery(){
           getFlickr(url2);          
         }}>수정</button>
 
+        {loading ? <img className="loading" src="./img/loading.gif" /> : ""} 
+
         <div className="list" ref={list}>
-          <Masonry
-            className={"frame"}
-            elementType={"ul"}
-            options={masonryOptions}
-            disableImagesLoaded={false}
-            updateOnEachImageLoad={false}
-          >
-            {
-              items.map((item, index)=>{
-                const imgSrc = `https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`;
-
-                return (
-                  <li key={index} className="item">
-                    <div className="inner">
-                      <img src={imgSrc} />
-
-                      <h2>{item.title}</h2>
-                    </div>                    
-                  </li>
-                )
-              })
-            }            
-          </Masonry>
+          <List />
         </div>        
       </div>
     </section>
@@ -79,10 +58,40 @@ function Gallery(){
   async function getFlickr(url){
     await axios
     .get(url)
-    .then(json=> setItems(json.data.photos.photo));  
+    .then(json=> setItems(json.data.photos.photo)); 
 
-    list.current.classList.add("on");      
+    list.current.classList.add("on"); 
+    setLoading(false);     
   }  
+
+  function List(){
+    return (
+      <Masonry
+        className={"frame"}
+        elementType={"ul"}
+        options={masonryOptions}
+        disableImagesLoaded={false}
+        updateOnEachImageLoad={false}
+      >
+        {
+          items.map((item, index)=>{
+            const imgSrc = `https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`;
+
+            return (
+              <li key={index} className="item">
+                <div className="inner">
+                  <img src={imgSrc} />
+
+                  <h2>{item.title}</h2>
+                </div>                    
+              </li>
+            )
+          })
+        }            
+      </Masonry>
+    )
+    
+  }
 }
 
 export default Gallery;
