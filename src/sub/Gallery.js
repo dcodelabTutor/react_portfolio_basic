@@ -8,8 +8,7 @@ const masonryOptions = {
   itemSelector: ".item"
 }
 
-function Gallery(){   
-  let [url, url2] = getURL();
+function Gallery(){  
   let [items, setItems] = useState([]);
   let [loading, setLoading] = useState(true);
   let [enableClick, setEnableClick] = useState(true);
@@ -17,7 +16,10 @@ function Gallery(){
   let list = useRef(null); 
   
   useEffect(()=> {    
-    getFlickr(url);
+    getFlickr({
+      type: "interest",
+      count: 500
+    });
     return ()=>{
       console.log("해당 컴포넌트 사라짐")
     }
@@ -31,7 +33,10 @@ function Gallery(){
             setEnableClick(false);
             list.current.classList.remove("on");
             setLoading(true);
-            getFlickr(url); 
+            getFlickr({
+              type: "interest",
+              count: 500
+            });
           }
            
         }}>Gallery</h1>
@@ -41,7 +46,11 @@ function Gallery(){
             setEnableClick(false);
             list.current.classList.remove("on");
             setLoading(true);
-            getFlickr(url2);  
+            getFlickr({
+              type: "search",
+              count: 500,
+              tags: "바다"
+            }); 
           }                  
         }}>수정</button>
 
@@ -53,19 +62,24 @@ function Gallery(){
       </div>
     </section>
   )
+ 
 
-  function getURL(){
+  async function getFlickr(opt){
+    let url ="";
     const baseURL = "https://www.flickr.com/services/rest/?";
-    const method1 = "flickr.interestingness.getList";
-    const method2 = "flickr.photos.search";
     const key= "e7ed3b39fe112d7e93d03c19325305e0";
-    const count = 500;
-    const url = `${baseURL}method=${method1}&api_key=${key}&per_page=${count}&format=json&nojsoncallback=1`;
-    const url2 = `${baseURL}method=${method2}&api_key=${key}&per_page=${count}&format=json&nojsoncallback=1&privacy_filter=1&tags=ocean`; 
-    return [url, url2];
-  }
+    const count = opt.count;
 
-  async function getFlickr(url){
+    if(opt.type=== "interest"){      
+      const method = "flickr.interestingness.getList";  
+      url = `${baseURL}method=${method}&api_key=${key}&per_page=${count}&format=json&nojsoncallback=1`;      
+    }else if(opt.type==="search"){
+      const method = "flickr.photos.search";
+      url = `${baseURL}method=${method}&api_key=${key}&per_page=${count}&format=json&nojsoncallback=1&privacy_filter=1&tags=${opt.tags}`;  
+    }else{
+      console.error("인수값에 type, count, 속성을 입력하세요.")
+    }
+
     await axios
     .get(url)
     .then(json=> setItems(json.data.photos.photo)); 
