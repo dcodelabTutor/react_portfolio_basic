@@ -2,6 +2,8 @@ import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import Masonry from "react-masonry-component";
 
+const body = document.querySelector("body");
+
 const masonryOptions = {
   fitWidth: false,
   gutter: 0,
@@ -145,6 +147,7 @@ function Gallery(){
                   <img src={imgSrc} onClick={()=>{
                     setIndex(index);
                     setIsPop(true);
+                    body.style.overflow = "hidden";                    
                   }} />
 
                   <h2>{item.title}</h2>
@@ -159,7 +162,6 @@ function Gallery(){
   }
 
   function Pop(){
-
     const pop = useRef(null);
 
     useEffect(()=>{
@@ -177,10 +179,13 @@ function Gallery(){
       <aside className="pop" ref={pop}>
         <img src={imgSrc} />
 
+        <p>{items[index].title}</p>
+
         <span onClick={()=>{
           pop.current.classList.remove("on");
           setTimeout(()=>{
             setIsPop(false);
+            body.style.overflow = "auto";
           },1000)
           
         }}>Close</span>

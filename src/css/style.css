@@ -150,9 +150,15 @@ footer .inner p {
 }
 .gallery .pop img {
   width: 100%;
-  height: 100%;
+  height: 95%;
   object-fit: contain;
   border: none;
+  margin-bottom: 20px;
+}
+.gallery .pop p {
+  font: 14px/1.2 "arial";
+  color: #bbb;
+  text-align: center;
 }
 .gallery .pop span {
   font: 14px/1 "arial";
