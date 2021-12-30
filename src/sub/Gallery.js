@@ -13,14 +13,15 @@ function Gallery(){
   let [loading, setLoading] = useState(true);
   let [enableClick, setEnableClick] = useState(true);
   let [interest, setInterest] = useState(true);
-
+  let [index, setIndex] = useState(0);
+  let [isPop, setIsPop] = useState(false);
   let list = useRef(null); 
   let inputs = useRef(null);
   
   useEffect(()=> {    
     getFlickr({
       type: "interest",
-      count: 500
+      count: 50
     });
     return ()=>{
       console.log("해당 컴포넌트 사라짐")
@@ -31,7 +32,6 @@ function Gallery(){
     <section className="content gallery">
       <div className="inner">
         <h1 onClick={()=>{
-
           if(enableClick && !interest){
             setInterest(true);
             init();
@@ -61,6 +61,7 @@ function Gallery(){
                 tags: tags
               });
           }} />
+
           <button onClick={()=>{
             if(enableClick){   
               
@@ -86,6 +87,8 @@ function Gallery(){
           <List />
         </div>        
       </div>
+
+      {isPop ? <Pop /> : ""}
     </section>
   )
 
@@ -93,8 +96,7 @@ function Gallery(){
     setEnableClick(false);
     list.current.classList.remove("on");
     setLoading(true);
-  }
- 
+  } 
 
   async function getFlickr(opt){
     let url ="";
@@ -124,8 +126,6 @@ function Gallery(){
     },1000); 
   }  
 
-
-
   function List(){
     return (
       <Masonry
@@ -142,7 +142,10 @@ function Gallery(){
             return (
               <li key={index} className="item">
                 <div className="inner">
-                  <img src={imgSrc} />
+                  <img src={imgSrc} onClick={()=>{
+                    setIndex(index);
+                    setIsPop(true);
+                  }} />
 
                   <h2>{item.title}</h2>
                 </div>                    
@@ -153,6 +156,36 @@ function Gallery(){
       </Masonry>
     )
     
+  }
+
+  function Pop(){
+
+    const pop = useRef(null);
+
+    useEffect(()=>{
+      pop.current.classList.add("on");
+      console.log("pop열림");
+
+      return ()=>{
+        console.log("pop닫힘")
+      }
+    },[]);
+
+    const imgSrc = `https://live.staticflickr.com/${items[index].server}/${items[index].id}_${items[index].secret}_b.jpg`; 
+
+    return (
+      <aside className="pop" ref={pop}>
+        <img src={imgSrc} />
+
+        <span onClick={()=>{
+          pop.current.classList.remove("on");
+          setTimeout(()=>{
+            setIsPop(false);
+          },1000)
+          
+        }}>Close</span>
+      </aside>
+    )
   }
 }
 
