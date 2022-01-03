@@ -1,4 +1,4 @@
-import {HashRouter, Route} from "react-router-dom";
+import {HashRouter, Switch, Route} from "react-router-dom";
 import "./css/style.css";
 import Header from "./common/Header.js";
 import Footer from "./common/Footer.js";
