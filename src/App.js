@@ -1,4 +1,4 @@
-import {Route} from "react-router-dom";
+import {HashRouter, Route} from "react-router-dom";
 import "./css/style.css";
 import Header from "./common/Header.js";
 import Footer from "./common/Footer.js";
@@ -14,17 +14,17 @@ function App() {
   return (
     <div className="App"> 
       <Header />
-
-      
-          <Route exact path="/react_portfolio_basic" component={Main}></Route> 
-          <Route exact path="/react_portfolio_basic/department" component={Department}></Route>
-          <Route exact path="/react_portfolio_basic/board" component={Board}></Route>
-          <Route exact path="/react_portfolio_basic/gallery" component={Gallery}></Route>
-          <Route exact path="/react_portfolio_basic/youtube" component={Youtube}></Route>
-          <Route exact path="/react_portfolio_basic/location" component={Location}></Route>
-          <Route exact path="/react_portfolio_basic/membership" component={Membership}></Route>  
-     
-          
+          <HashRouter>
+            <Switch>
+              <Route  path="/" component={Main}></Route> 
+              <Route  path="/department" component={Department}></Route>
+              <Route  path="/board" component={Board}></Route>
+              <Route  path="/gallery" component={Gallery}></Route>
+              <Route  path="/youtube" component={Youtube}></Route>
+              <Route  path="/location" component={Location}></Route>
+              <Route  path="/membership" component={Membership}></Route>  
+            </Switch>
+          </HashRouter>
       <Footer />      
     </div>
   );
