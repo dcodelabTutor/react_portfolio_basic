@@ -6,11 +6,11 @@ function Header(){
     <header>
       <div className="inner">
         <h1>
-        <NavLink activeStyle={active} exact to="/">DCODELAB1</NavLink>
+        <NavLink activeStyle={active} exact to="/">DCODELAB2</NavLink>
         </h1>
 
         <ul id="gnb">
-          <li><NavLink activeStyle={active} exact to="/department">DEPARTMENT1</NavLink></li>
+          <li><NavLink activeStyle={active} exact to="/department">DEPARTMENT2</NavLink></li>
           <li><NavLink activeStyle={active} exact to="/board">BOARD</NavLink></li>
           <li><NavLink activeStyle={active} exact to="/gallery">GALLERY</NavLink></li>
           <li><NavLink activeStyle={active} exact to="/youtube">YOUTUBE</NavLink></li>
