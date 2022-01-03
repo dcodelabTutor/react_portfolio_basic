@@ -9,15 +9,13 @@ import Gallery from "./sub/Gallery.js";
 import Location from "./sub/Location.js";
 import Membership from "./sub/Membership.js";
 import Youtube from "./sub/Youtube.js";
-import { BrowserRouter } from "react-router-dom/cjs/react-router-dom.min";
 
 function App() {
   return (
     <div className="App"> 
       <Header />
 
-      <BrowserRouter>
-        <Switch>
+      
           <Route exact path="/react_portfolio_basic" component={Main}></Route> 
           <Route exact path="/react_portfolio_basic/department" component={Department}></Route>
           <Route exact path="/react_portfolio_basic/board" component={Board}></Route>
@@ -25,8 +23,7 @@ function App() {
           <Route exact path="/react_portfolio_basic/youtube" component={Youtube}></Route>
           <Route exact path="/react_portfolio_basic/location" component={Location}></Route>
           <Route exact path="/react_portfolio_basic/membership" component={Membership}></Route>  
-        </Switch>
-      </BrowserRouter>
+     
           
       <Footer />      
     </div>

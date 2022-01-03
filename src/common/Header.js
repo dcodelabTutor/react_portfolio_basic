@@ -6,7 +6,7 @@ function Header(){
     <header>
       <div className="inner">
         <h1>
-        <NavLink activeStyle={active} exact to="/">DCODELAB2</NavLink>
+        <NavLink activeStyle={active} exact to="/">DCODELAB-router</NavLink>
         </h1>
 
         <ul id="gnb">
