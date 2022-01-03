@@ -18,13 +18,13 @@ function App() {
 
       <BrowserRouter>
         <Switch>
-          <Route exact path="/a" component={Main}></Route> 
-          <Route exact path="/a/department" component={Department}></Route>
-          <Route exact path="/a/board" component={Board}></Route>
-          <Route exact path="/a/gallery" component={Gallery}></Route>
-          <Route exact path="/a/youtube" component={Youtube}></Route>
-          <Route exact path="/a/location" component={Location}></Route>
-          <Route exact path="/a/membership" component={Membership}></Route>  
+          <Route exact path="/react_portfolio_basic" component={Main}></Route> 
+          <Route exact path="/react_portfolio_basic/department" component={Department}></Route>
+          <Route exact path="/react_portfolio_basic/board" component={Board}></Route>
+          <Route exact path="/react_portfolio_basic/gallery" component={Gallery}></Route>
+          <Route exact path="/react_portfolio_basic/youtube" component={Youtube}></Route>
+          <Route exact path="/react_portfolio_basic/location" component={Location}></Route>
+          <Route exact path="/react_portfolio_basic/membership" component={Membership}></Route>  
         </Switch>
       </BrowserRouter>
           
