@@ -183,5 +183,14 @@ footer .inner p {
     width: 100% !important;
   }
 }
+.membership .formInput span {
+  font-size: 12px;
+  padding: 3px;
+  color: red;
+  display: none;
+}
+.membership .formInput input:invalid ~ span {
+  display: block;
+}
 
 /*# sourceMappingURL=style.css.map */

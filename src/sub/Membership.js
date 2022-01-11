@@ -16,35 +16,44 @@ function Membership(){
       name: 'username',
       type: 'text',
       placeholder: 'Username',
-      label: 'Username'
+      label: 'Username',
+      errorMessage: '아이디는 10글자 이하 특수문자 포함하시오',
+      required: true,
     },
     {
       id: 2,
       name: 'email',
       type: 'text',
       placeholder: 'Email',
-      label: 'Email'
+      label: 'Email',
+      errorMessage: '이메일은 10글자 이상 @포함하시오',
+      required: true,
     },
     {
       id: 3,
       name: 'birthday',
-      type: 'text',
+      type: 'date',
       placeholder: 'Birthday',
-      label: 'Birthday'
+      label: 'Birthday',
+      errorMessage: '날짜를 선택하시오'
     },
     {
       id: 4,
       name: 'password',
       type: 'text',
       placeholder: 'Password',
-      label: 'Password'
+      label: 'Password',
+      errorMessage: '비밀번호는 5글자 이상, 문자,숫자,특수문자 포함하시오',
+      required: true,
     },
     {
       id: 5,
       name: 'confirmPassword',
       type: 'text',
       placeholder: 'Confirm Password',
-      label: 'Confirm Password'
+      label: 'Confirm Password',
+      errorMessage: '비번을 동일하게 입력하시오',
+      required: true,
     }
   ];
 

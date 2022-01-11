@@ -1,10 +1,11 @@
 function FormInput(props){
-  const {label, onChange, id, ...inputProps} = props;
+  const {label, errorMessage, onChange, id, ...inputProps} = props;
 
   return (
     <div className="formInput">
       <label>{label}</label> 
-      <input {...inputProps} onChange={onChange} />      
+      <input {...inputProps} onChange={onChange} required />    
+      <span>{errorMessage}</span>  
     </div>
   )
 }
