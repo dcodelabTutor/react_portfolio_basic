@@ -30,16 +30,20 @@ function Location() {
 
   const validate = (values)=> {
     const errors = {};
-    const regex = '^(?=.*[a-zA-Z])(?=.*[@])[a-zA-Z0-9!@#$%^&*]{5,10}$';
-    if(!values.userid){
-      errors.userid = 'UserID is required!';
+    const eng = /[a-zA-Z]/;
+    const num = /[0-9]/;
+    const spc = /[!@#$%^&*]/;
+
+    if(!values.userid || values.userid.length <5){
+      errors.userid = '아이디를 5글자 이상 입력하세요';
+    }   
+    if(!values.password || !eng.test(values.password) || !num.test(values.password) || !spc.test(values.password) || values.password.length <5){
+      errors.password = '비밀번호는 숫자,문자,특수문자를 포함해 5글자 이상 입력하세요';
     }
-    if(!values.password){
-      errors.password = 'Password is required!';
+    if(!values.email || !/@/.test(values.email) || values.email.length <5){
+      errors.email = '이메일은 @를 포함하여 5글자 이상 입력하세요';
     }
-    if(!values.email){
-      errors.email = 'Email is required!';
-    }
+    //console.log(errors);
     return errors;
   }
 
