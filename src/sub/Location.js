@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Location() {
   const initValues = {
@@ -7,29 +7,59 @@ function Location() {
     password: ''
   }
   const [values, setValues] = useState(initValues);
-  const handleChange = e =>{
-    console.log(e.target);
-    const {name, value} = e.target;
-    //[name]:value앞에 대괄호를 붙여서 현재 onChange가 발생하는 input요소 name의 value값을 변경
-    setValues({...values, [name]:value});
-    console.log(values);
+  const [errors, setErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
+
+  const handleChange = e =>{  
+    const {name, value} = e.target;    
+    setValues({...values, [name]:value}); 
+  }
+
+  const  handleSubmit = e =>{
+    e.preventDefault();
+    setErrors(validate(values));
+    setIsSubmit(true);
+  }
+
+  useEffect(()=>{
+    console.log(errors);
+    if(Object.keys(errors).length === 0 && isSubmit){
+      console.log(values);
+    }
+  },[errors]);
+
+  const validate = (values)=> {
+    const errors = {};
+    const regex = '^(?=.*[a-zA-Z])(?=.*[@])[a-zA-Z0-9!@#$%^&*]{5,10}$';
+    if(!values.userid){
+      errors.userid = 'UserID is required!';
+    }
+    if(!values.password){
+      errors.password = 'Password is required!';
+    }
+    if(!values.email){
+      errors.email = 'Email is required!';
+    }
+    return errors;
   }
 
   return (
     <section className="content location">
       <div className="inner">
         <h1>Location</h1>
-        <form>
+
+
+        <form onSubmit= {handleSubmit}>
 
           <label>userid</label>
           <input 
             type="text" 
             name='userid' 
-            placeholder='UserID' 
-            //변경된 value값을 실시간으로 인풋에 출력
+            placeholder='UserID'           
             value={values.userid} 
             onChange={handleChange}
           /><br />
+          <p className='err'>{errors.userid}</p>
 
 
           <label>password</label>
@@ -40,6 +70,7 @@ function Location() {
             value={values.password} 
             onChange={handleChange}
           /><br />
+          <p className='err'>{errors.password}</p>
 
 
           <label>email</label>
@@ -50,6 +81,7 @@ function Location() {
             value={values.email} 
             onChange={handleChange}
           /><br />
+          <p className='err'>{errors.email}</p>
 
           <button>Submit</button>
         </form>
