@@ -10,7 +10,8 @@ function Location() {
   const handleChange = e =>{
     console.log(e.target);
     const {name, value} = e.target;
-    setValues({...values, name:value});
+    //[name]:value앞에 대괄호를 붙여서 현재 onChange가 발생하는 input요소 name의 value값을 변경
+    setValues({...values, [name]:value});
     console.log(values);
   }
 
@@ -25,6 +26,7 @@ function Location() {
             type="text" 
             name='userid' 
             placeholder='UserID' 
+            //변경된 value값을 실시간으로 인풋에 출력
             value={values.userid} 
             onChange={handleChange}
           /><br />
@@ -32,7 +34,7 @@ function Location() {
 
           <label>password</label>
           <input 
-            type="text" 
+            type="password" 
             name='password' 
             placeholder='Password' 
             value={values.password} 
