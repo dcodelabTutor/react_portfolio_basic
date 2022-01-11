@@ -4,7 +4,8 @@ function Location() {
   const initValues = {
     userid: '',
     email: '',
-    password: ''
+    password: '',
+    password2: ''
   }
   const [values, setValues] = useState(initValues);
   const [errors, setErrors] = useState({});
@@ -45,6 +46,9 @@ function Location() {
     if(!values.email || !/@/.test(values.email) || values.email.length <5){
       errors.email = '이메일은 @를 포함하여 5글자 이상 입력하세요';
     }
+    if(values.password !== values.password2){
+      errors.password2 = '비밀번호를 같게 입력하세요';
+    }
     //console.log(errors);
     return errors;
   }
@@ -77,6 +81,16 @@ function Location() {
             onChange={handleChange}
           /><br />
           <p className='err'>{errors.password}</p>
+
+          <label>password2</label>
+          <input 
+            type="password" 
+            name='password2' 
+            placeholder='Password2' 
+            value={values.password2} 
+            onChange={handleChange}
+          /><br />
+          <p className='err'>{errors.password2}</p>
 
 
           <label>email</label>
