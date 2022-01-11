@@ -9,6 +9,7 @@ function Location() {
   const [values, setValues] = useState(initValues);
   const [errors, setErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const handleChange = e =>{  
     const {name, value} = e.target;    
@@ -25,6 +26,7 @@ function Location() {
     console.log(errors);
     if(Object.keys(errors).length === 0 && isSubmit){
       console.log(values);
+      setSuccess(true);
     }
   },[errors]);
 
@@ -52,7 +54,7 @@ function Location() {
       <div className="inner">
         <h1>Location</h1>
 
-
+        {success ? <div>회원가입을 축하합니다.</div> : ''}
         <form onSubmit= {handleSubmit}>
 
           <label>userid</label>
