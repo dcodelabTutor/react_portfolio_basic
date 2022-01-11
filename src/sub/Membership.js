@@ -17,7 +17,8 @@ function Membership(){
       type: 'text',
       placeholder: 'Username',
       label: 'Username',
-      errorMessage: '아이디는 10글자 이하 특수문자 포함하시오',
+      errorMessage: '아이디는 3글자에서 16글자 이하 입력하시오',
+      pattern: '^[a-zA-Z0-9]{3,16}$',
       required: true,
     },
     {
@@ -26,7 +27,8 @@ function Membership(){
       type: 'text',
       placeholder: 'Email',
       label: 'Email',
-      errorMessage: '이메일은 10글자 이상 @포함하시오',
+      errorMessage: '이메일은 5~10글자 이상 @포함하시오',
+      pattern: '^(?=.*[a-zA-Z])(?=.*[@])[a-zA-Z0-9!@#$%^&*]{5,10}$',
       required: true,
     },
     {
@@ -43,7 +45,8 @@ function Membership(){
       type: 'text',
       placeholder: 'Password',
       label: 'Password',
-      errorMessage: '비밀번호는 5글자 이상, 문자,숫자,특수문자 포함하시오',
+      errorMessage: '비밀번호는 5~10글자 사이, 문자,숫자,특수문자 포함하시오',
+      pattern: '^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{5,10}$',
       required: true,
     },
     {
@@ -53,6 +56,7 @@ function Membership(){
       placeholder: 'Confirm Password',
       label: 'Confirm Password',
       errorMessage: '비번을 동일하게 입력하시오',
+      pattern: values.password,
       required: true,
     }
   ];
