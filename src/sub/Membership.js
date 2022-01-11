@@ -58,12 +58,14 @@ function Membership(){
       errorMessage: '비번을 동일하게 입력하시오',
       pattern: values.password,
       required: true,
-    }
+    },
+   
   ];
 
 
   function handleSubmit(e){
     e.preventDefault();
+    console.log('test');
   }
 
   function onChange(e){

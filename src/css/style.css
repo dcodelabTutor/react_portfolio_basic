@@ -189,8 +189,11 @@ footer .inner p {
   color: red;
   display: none;
 }
-.membership .formInput input:invalid ~ span {
+.membership .formInput input:invalid[focused=true] ~ span {
   display: block;
+}
+.membership .formInput input:invalid[focused=true] {
+  border: 1px solid red;
 }
 
 /*# sourceMappingURL=style.css.map */
