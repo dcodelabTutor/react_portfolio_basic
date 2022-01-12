@@ -8,7 +8,7 @@ function Location() {
     password2: '',
     gender: '',
     interests: '',
-   
+    edu: ''   
   }
   const [values, setValues] = useState(initValues);
   const [errors, setErrors] = useState({});
@@ -28,15 +28,19 @@ function Location() {
     setValues({...values, [name]:isCheck})
   }
 
+  const handleSelect = e =>{
+    const {name} = e.target;
+    const isSelected = e.target.options[e.target.selectedIndex].value;
+    setValues({...values, [name]:isSelected})
+  }
+
   const  handleSubmit = e =>{
     e.preventDefault();
     setErrors(validate(values));
     setIsSubmit(true);
-    console.log(values);
   }
 
-  useEffect(()=>{
-    console.log(errors);
+  useEffect(()=>{   
     if(Object.keys(errors).length === 0 && isSubmit){
       console.log(values);
       setSuccess(true);
@@ -67,6 +71,9 @@ function Location() {
     if(!values.interests){
       errors.interests = '관심사를 한가지 이상 선택하세요';
     } 
+    if(!values.edu){
+      errors.edu = '학력을 선택하세요';
+    }
     return errors;
   }
 
@@ -176,6 +183,15 @@ function Location() {
             />
             <p className='err'>{errors.interests}</p>
           </article>
+
+          <label htmlFor="edu">Education</label>
+          <select name="edu" id="edu" onChange={handleSelect}>
+            <option value="">학력을 선택하세요</option>
+            <option value="elementary-school">초등학교</option>
+            <option value="middle-school">중학교</option>
+            <option value="hight-school">대학교</option>
+          </select>
+          <p className='err'>{errors.edu}</p>
 
           <button>Submit</button>
         </form>
